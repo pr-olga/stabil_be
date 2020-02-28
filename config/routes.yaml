@@ -6,3 +6,7 @@ matches:
   type      : rest
   resource  : App\Controller\MatcheController
   prefix    : api
+games:
+  type      : rest
+  resource  : App\Controller\GameController
+  prefix    : api

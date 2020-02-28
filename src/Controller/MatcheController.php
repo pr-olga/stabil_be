@@ -39,6 +39,7 @@ class MatcheController extends AbstractFOSRestController
     public function postMatcheAction()
     {
         $matche = new Matche();
+        $matche->addGame();
     }
 
 }

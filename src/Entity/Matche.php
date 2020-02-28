@@ -66,7 +66,7 @@ class Matche
     {
         if (!$this->games->contains($game)) {
             $this->games[] = $game;
-            $game->setMatches($this);
+            $game->setMatche($this);
         }
 
         return $this;
@@ -77,8 +77,8 @@ class Matche
         if ($this->games->contains($game)) {
             $this->games->removeElement($game);
             // set the owning side to null (unless already changed)
-            if ($game->getMatches() === $this) {
-                $game->setMatches(null);
+            if ($game->getMatche() === $this) {
+                $game->setMatche(null);
             }
         }
 
