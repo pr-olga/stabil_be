@@ -41,6 +41,7 @@ class GameController extends AbstractFOSRestController
     public function postGameAction(ParamFetcher $paramFetcher)
     {
         $white = $paramFetcher->get('white');
+
         if ($white) {
             $game = new Game();
 
@@ -52,7 +53,7 @@ class GameController extends AbstractFOSRestController
             return $this->view($game, Response::HTTP_CREATED);
         }
 
-        return $this->view($game, Response::HTTP_BAD_REQUEST);
+        return $this->view("error", Response::HTTP_BAD_REQUEST);
 
     }
 
