@@ -2,19 +2,28 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 
-class MatchController extends AbstractController
+class MatchController extends AbstractFOSRestController
 {
-    /**
-     * @Route("/match", name="match")
-     */
-    public function index()
+    public function getMatchesAction()
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/MatchController.php',
-        ]);
+
     }
+
+    public function getMatchAction(int $id)
+    {
+
+    }
+
+    public function getMatchesGamesAction(int $id)
+    {
+
+    }
+
+    public function postMatchAction()
+    {
+
+    }
+
 }
