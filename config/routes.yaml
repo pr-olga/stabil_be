@@ -10,3 +10,7 @@ games:
   type      : rest
   resource  : App\Controller\GameController
   prefix    : api
+players:
+  type      : rest
+  resource  : App\Controller\PlayerController
+  prefix    : api

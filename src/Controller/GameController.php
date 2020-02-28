@@ -38,7 +38,7 @@ class GameController extends AbstractFOSRestController
      * @RequestParam(name="white", description="white sunk", nullable=true)
      * @param ParamFetcher $paramFetcher
      */
-    public function postGameAction(ParamFetcher $paramFetcher)
+    public function postGamesAction(ParamFetcher $paramFetcher)
     {
         $white = $paramFetcher->get('white');
 
