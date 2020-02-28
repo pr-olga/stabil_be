@@ -39,6 +39,11 @@ class Match
      */
     private $player_2;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isFinished;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
@@ -100,6 +105,18 @@ class Match
     public function setPlayer2(Player $player_2): self
     {
         $this->player_2 = $player_2;
+
+        return $this;
+    }
+
+    public function getIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(?bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }
