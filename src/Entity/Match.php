@@ -8,9 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MatchRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Match
 {
+
+    use Timestamps;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

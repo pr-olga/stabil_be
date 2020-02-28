@@ -6,9 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Game
 {
+
+   use Timestamps;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
