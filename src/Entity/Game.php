@@ -78,10 +78,10 @@ class Game
     private $victory;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Match", inversedBy="games")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Matche", inversedBy="games")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $match;
+    private $matche;
 
     public function getId(): ?int
     {
@@ -220,14 +220,21 @@ class Game
         return $this;
     }
 
-    public function getMatch(): ?Match
+    public function getMatche(): ?Matche
     {
-        return $this->match;
+        return $this->matche;
     }
 
-    public function setMatch(?Match $match): self
+    public function setMatch(?Matche $matche): self
     {
         $this->matches = $matches;
+
+        return $this;
+    }
+
+    public function setMatche(?Matche $matche): self
+    {
+        $this->matche = $matche;
 
         return $this;
     }

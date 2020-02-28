@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\MatchRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MatcheRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Match
+class Matche
 {
 
     use Timestamps;
@@ -23,7 +23,7 @@ class Match
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Game", mappedBy="match")
+     * @ORM\OneToMany(targetEntity="App\Entity\Game", mappedBy="matche")
      */
     private $games;
 

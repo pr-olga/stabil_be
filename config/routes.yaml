@@ -4,5 +4,5 @@
 
 matches:
   type      : rest
-  resource  : App\Controller\MatchController
+  resource  : App\Controller\MatcheController
   prefix    : api
