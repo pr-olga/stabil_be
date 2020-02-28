@@ -225,13 +225,6 @@ class Game
         return $this->matche;
     }
 
-    public function setMatch(?Matche $matche): self
-    {
-        $this->matches = $matches;
-
-        return $this;
-    }
-
     public function setMatche(?Matche $matche): self
     {
         $this->matche = $matche;
