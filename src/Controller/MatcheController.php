@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Matche;
+use App\Entity\Player;
+use App\Entity\Game;
 use App\Repository\MatcheRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -50,6 +52,15 @@ class MatcheController extends AbstractFOSRestController
             $matche = new Matche();
             $matche->setIsFinished($is_finished);
 
+            $player1 = new Player();
+            $player1->setName('olgita1');
+
+            $player2 = new Player();
+            $player2->setName('olgita2');
+
+            $matche->setPlayer1($player1);
+            $matche->setPlayer2($player2);
+
             $this->entityManager->persist($matche);
             $this->entityManager->flush();
 
@@ -63,12 +74,13 @@ class MatcheController extends AbstractFOSRestController
      * @RequestParam()
      * @param ParamFetcher $paramFetcher
      */
-    public function postMatcheGameAction(ParamFetcher $paramFetcher, int $id)
+     public function patchMatcheGamesAction(ParamFetcher $paramFetcher, int $id)
     {
-        $matche = $this->matcheRepository->findByOne(['id' => $id]);
+        $matche = $this->matcheRepository->findOneBy(['id' => $id]);
 
         if ($matche) {
             $game = new Game();
+            $game->setMatche($matche);
             $matche->addGame($game);
 
             $this->entityManager->persist($game);

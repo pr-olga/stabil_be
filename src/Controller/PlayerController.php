@@ -39,7 +39,7 @@ class PlayerController extends AbstractFOSRestController
      * @RequestParam(name="name")
      * @param ParamFetcher $paramFetcher
      */
-    public function postPlayerAction(ParamFetcher $paramFetcher)
+    /* public function postPlayerAction(ParamFetcher $paramFetcher)
     {
         $name = $paramFetcher->get('name');
 
@@ -55,7 +55,7 @@ class PlayerController extends AbstractFOSRestController
 
         return $this->view($player, Response::HTTP_BAD_REQUEST);
 
-    }
+    } */
 
 
 }

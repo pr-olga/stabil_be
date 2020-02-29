@@ -28,6 +28,18 @@ class Matche
     private $games;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Player", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $player_1;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Player", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $player_2;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isFinished;
@@ -69,6 +81,30 @@ class Matche
                 $game->setMatche(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlayer1(): ?Player
+    {
+        return $this->player_1;
+    }
+
+    public function setPlayer1(Player $player_1): self
+    {
+        $this->player_1 = $player_1;
+
+        return $this;
+    }
+
+    public function getPlayer2(): ?Player
+    {
+        return $this->player_2;
+    }
+
+    public function setPlayer2(Player $player_2): self
+    {
+        $this->player_2 = $player_2;
 
         return $this;
     }

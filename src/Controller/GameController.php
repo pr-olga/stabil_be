@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations\RequestParam;
-use FOS\RestBundle\Controller\Annotations\RequestParamInterface;
-use FOS\RestBundle\Request\ParamFetcher;
-use App\Repository\GameRepository;
 use App\Entity\Game;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Player;
+use App\Entity\Matche;
+use App\Repository\GameRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Request\ParamFetcher;
+use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends AbstractFOSRestController
 {
@@ -33,28 +35,4 @@ class GameController extends AbstractFOSRestController
     {
 
     }
-
-    /**
-     * @RequestParam(name="white", description="white sunk", nullable=true)
-     * @param ParamFetcher $paramFetcher
-     */
-    public function postGamesAction(ParamFetcher $paramFetcher)
-    {
-        $white = $paramFetcher->get('white');
-
-        if ($white) {
-            $game = new Game();
-
-            $game->setWhite($white);
-
-            $this->entityManager->persist($game);
-            $this->entityManager->flush();
-
-            return $this->view($game, Response::HTTP_CREATED);
-        }
-
-        return $this->view("error", Response::HTTP_BAD_REQUEST);
-
-    }
-
 }

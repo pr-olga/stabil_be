@@ -13,4 +13,4 @@ fos_rest:
     formats:
       json: true
   exception:
-    enabled: true
+    enabled: false
