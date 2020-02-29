@@ -75,11 +75,11 @@ class MatcheController extends AbstractFOSRestController
             $matche->addGame($game);
 
             $player1 = new Player();
-            $player1->setName('olgita1');
+            $player1->setName('player-1');
             $player1->setGame($game);
 
             $player2 = new Player();
-            $player2->setName('olgita2');
+            $player2->setName('player-2');
             $player2->setGame($game);
 
             $this->entityManager->persist($game);

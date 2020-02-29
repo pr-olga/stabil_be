@@ -33,8 +33,15 @@ class PlayerController extends AbstractFOSRestController
     }
 
     /**
+     * @RequestParam(name="missing", description="test", nullable=true)
      * @RequestParam(name="white", description="test", nullable=true)
      * @RequestParam(name="black", description="test", nullable=true)
+     * @RequestParam(name="wrong", description="test", nullable=true)
+     * @RequestParam(name="double_fault", description="test", nullable=true)
+     * @RequestParam(name="line_4", description="test", nullable=true)
+     * @RequestParam(name="line_5", description="test", nullable=true)
+     * @RequestParam(name="line_6", description="test", nullable=true)
+     * @RequestParam(name="victory", description="test", nullable=true)
      * @param ParamFetcher $paramFetcher
      * @param integer $id
      */
@@ -45,13 +52,20 @@ class PlayerController extends AbstractFOSRestController
             $params[$criterionName] = $criterionValue;
         }
 
-        $game = $this->playerRepository->findOneBy(['id' => $id]);
+        $player = $this->playerRepository->findOneBy(['id' => $id]);
 
-        if ($game) {
-            $game->setWhite($params['white']);
-            $game->setBlack($params['black']);
+        if ($player) {
+            $player->setWhite($params['missing']);
+            $player->setWhite($params['white']);
+            $player->setBlack($params['black']);
+            $player->setWhite($params['wrong']);
+            $player->setWhite($params['double_fault']);
+            $player->setWhite($params['line_4']);
+            $player->setWhite($params['line_5']);
+            $player->setWhite($params['line_6']);
+            $player->setWhite($params['victory']);
 
-            $this->entityManager->persist($game);
+            $this->entityManager->persist($player);
             $this->entityManager->flush();
 
             return $this->view(null, Response::HTTP_NO_CONTENT);
@@ -59,27 +73,5 @@ class PlayerController extends AbstractFOSRestController
 
         return $this->view("error", Response::HTTP_BAD_REQUEST);
     }
-
-    /**
-     * @RequestParam(name="name")
-     * @param ParamFetcher $paramFetcher
-     */
-    /* public function postPlayerAction(ParamFetcher $paramFetcher)
-    {
-    $name = $paramFetcher->get('name');
-
-    if ($name) {
-    $player = new Player();
-    $player->setName($name);
-
-    $this->entityManager->persist($player);
-    $this->entityManager->flush();
-
-    return $this->view($player, Response::HTTP_CREATED);
-    }
-
-    return $this->view($player, Response::HTTP_BAD_REQUEST);
-
-    } */
 
 }
