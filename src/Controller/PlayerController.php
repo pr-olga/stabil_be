@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Request\ParamFetcher;
-use FOS\RestBundle\Controller\Annotations\RequestParam;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use App\Repository\PlayerRepository;
-use App\Entity\Player;
-use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Request\ParamFetcher;
+use Symfony\Component\HttpFoundation\Response;
 
 class PlayerController extends AbstractFOSRestController
 {
@@ -34,6 +32,33 @@ class PlayerController extends AbstractFOSRestController
 
     }
 
+    /**
+     * @RequestParam(name="white", description="test", nullable=true)
+     * @RequestParam(name="black", description="test", nullable=true)
+     * @param ParamFetcher $paramFetcher
+     * @param integer $id
+     */
+    public function patchPlayerAction(ParamFetcher $paramFetcher, int $id)
+    {
+        $params = [];
+        foreach ($paramFetcher->all() as $criterionName => $criterionValue) {
+            $params[$criterionName] = $criterionValue;
+        }
+
+        $game = $this->gameRepository->findOneBy(['id' => $id]);
+
+        if ($game) {
+            $game->setWhite($params['white']);
+            $game->setBlack($params['black']);
+
+            $this->entityManager->persist($game);
+            $this->entityManager->flush();
+
+            return $this->view(null, Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->view("error", Response::HTTP_BAD_REQUEST);
+    }
 
     /**
      * @RequestParam(name="name")
@@ -41,21 +66,20 @@ class PlayerController extends AbstractFOSRestController
      */
     /* public function postPlayerAction(ParamFetcher $paramFetcher)
     {
-        $name = $paramFetcher->get('name');
+    $name = $paramFetcher->get('name');
 
-        if ($name) {
-            $player = new Player();
-            $player->setName($name);
+    if ($name) {
+    $player = new Player();
+    $player->setName($name);
 
-            $this->entityManager->persist($player);
-            $this->entityManager->flush();
+    $this->entityManager->persist($player);
+    $this->entityManager->flush();
 
-            return $this->view($player, Response::HTTP_CREATED);
-        }
+    return $this->view($player, Response::HTTP_CREATED);
+    }
 
-        return $this->view($player, Response::HTTP_BAD_REQUEST);
+    return $this->view($player, Response::HTTP_BAD_REQUEST);
 
     } */
-
 
 }
