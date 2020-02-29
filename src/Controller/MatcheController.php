@@ -38,10 +38,25 @@ class MatcheController extends AbstractFOSRestController
 
     }
 
-    public function postMatcheAction()
+    /**
+     * @RequestParam(name="is_finished")
+     * @param ParamFetcher $paramFetcher
+     */
+    public function postMatcheAction(ParamFetcher $paramFetcher)
     {
-        $matche = new Matche();
-        $matche->addGame();
+        $is_finished = $paramFetcher->get('is_finished');
+
+        if ($is_finished) {
+            $matche = new Matche();
+            $matche->setIsFinished($is_finished);
+
+            $this->entityManager->persist($matche);
+            $this->entityManager->flush();
+
+            return $this->view($matche, Response::HTTP_CREATED);
+        }
+
+        return $this->view('error', Response::HTTP_BAD_REQUEST);
     }
 
     /**
