@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use App\Repository\PlayerRepository;
 use App\Entity\Player;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,16 +36,15 @@ class PlayerController extends AbstractFOSRestController
 
 
     /**
-     * @RequestParam(name="name", description="name of player", nullable=false)
+     * @RequestParam(name="name")
      * @param ParamFetcher $paramFetcher
      */
     public function postPlayerAction(ParamFetcher $paramFetcher)
     {
-        $player = $paramFetcher->get('name');
+        $name = $paramFetcher->get('name');
 
-        if ($player) {
+        if ($name) {
             $player = new Player();
-
             $player->setName($name);
 
             $this->entityManager->persist($player);
@@ -53,7 +53,7 @@ class PlayerController extends AbstractFOSRestController
             return $this->view($player, Response::HTTP_CREATED);
         }
 
-        return $this->view("error", Response::HTTP_BAD_REQUEST);
+        return $this->view($player, Response::HTTP_BAD_REQUEST);
 
     }
 

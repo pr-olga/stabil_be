@@ -21,8 +21,9 @@ trait Timestamps
    */
   public function createdAt()
   {
-    $this->createdAt = new \DateTime();
-    $this->updatedAt = new \DateTime();
+    $time = new \DateTime();
+    $this->createdAt = $time->format('Y-m-d H:i:s');
+    $this->updatedAt = $time->format('Y-m-d H:i:s');
   }
 
   /**
@@ -30,6 +31,7 @@ trait Timestamps
    */
   public function updatedAt()
   {
-    $this->updatedAt = new \DateTime();
+    $time = new \DateTime();
+    $this->updatedAt = $time->format('Y-m-d H:i:s');
   }
 }
