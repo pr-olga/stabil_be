@@ -86,7 +86,7 @@ class MatcheController extends AbstractFOSRestController
             $this->entityManager->persist($game);
             $this->entityManager->flush();
 
-            return $this->view($game, Response::HTTP_CREATED);
+            return $this->view(null, Response::HTTP_NO_CONTENT);
         }
 
         return $this->view("error", Response::HTTP_BAD_REQUEST);
