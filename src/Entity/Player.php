@@ -28,7 +28,7 @@ class Player
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Game", inversedBy="player")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
      */
     private $game;
@@ -77,11 +77,6 @@ class Player
      * @ORM\Column(type="integer", nullable=true)
      */
     private $victory;
-
-    public function __construct()
-    {
-        $this->game = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -208,29 +203,17 @@ class Player
         return $this;
     }
 
-    /**
-     * @return Collection|Game[]
-     */
-    public function getGame(): Collection
+    public function getGame(): ?Game
     {
         return $this->game;
     }
 
-    public function addGame(Game $game): self
+    public function setGame(?Game $game): self
     {
-        if (!$this->game->contains($game)) {
-            $this->game[] = $game;
-        }
+        $this->game = $game;
 
         return $this;
     }
 
-    public function removeGame(Game $game): self
-    {
-        if ($this->game->contains($game)) {
-            $this->game->removeElement($game);
-        }
 
-        return $this;
-    }
 }

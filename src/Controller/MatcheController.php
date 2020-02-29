@@ -52,15 +52,6 @@ class MatcheController extends AbstractFOSRestController
             $matche = new Matche();
             $matche->setIsFinished($is_finished);
 
-            $player1 = new Player();
-            $player1->setName('olgita1');
-
-            $player2 = new Player();
-            $player2->setName('olgita2');
-
-            $matche->setPlayer1($player1);
-            $matche->setPlayer2($player2);
-
             $this->entityManager->persist($matche);
             $this->entityManager->flush();
 
@@ -79,11 +70,21 @@ class MatcheController extends AbstractFOSRestController
         $matche = $this->matcheRepository->findOneBy(['id' => $id]);
 
         if ($matche) {
+
             $game = new Game();
-            $game->setMatche($matche);
             $matche->addGame($game);
 
+            $player1 = new Player();
+            $player1->setName('olgita1');
+            $player1->setGame($game);
+
+            $player2 = new Player();
+            $player2->setName('olgita2');
+            $player2->setGame($game);
+
             $this->entityManager->persist($game);
+            $this->entityManager->persist($player1);
+            $this->entityManager->persist($player2);
             $this->entityManager->flush();
 
             return $this->view(null, Response::HTTP_NO_CONTENT);

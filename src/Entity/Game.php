@@ -29,8 +29,7 @@ class Game
     private $matche;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Player", inversedBy="games")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="game")
      */
     private $players;
 

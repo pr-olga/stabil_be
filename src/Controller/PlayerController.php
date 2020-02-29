@@ -45,7 +45,7 @@ class PlayerController extends AbstractFOSRestController
             $params[$criterionName] = $criterionValue;
         }
 
-        $game = $this->gameRepository->findOneBy(['id' => $id]);
+        $game = $this->playerRepository->findOneBy(['id' => $id]);
 
         if ($game) {
             $game->setWhite($params['white']);
