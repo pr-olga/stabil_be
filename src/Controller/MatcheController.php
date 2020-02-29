@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-use App\Repository\MatcheRepository;
 use App\Entity\Matche;
-use Symfony\Component\HttpFoundation\Response;
+use App\Repository\MatcheRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Request\ParamFetcher;
+use Symfony\Component\HttpFoundation\Response;
 
 class MatcheController extends AbstractFOSRestController
 {
@@ -40,6 +42,27 @@ class MatcheController extends AbstractFOSRestController
     {
         $matche = new Matche();
         $matche->addGame();
+    }
+
+    /**
+     * @RequestParam()
+     * @param ParamFetcher $paramFetcher
+     */
+    public function postMatcheGameAction(ParamFetcher $paramFetcher, int $id)
+    {
+        $matche = $this->matcheRepository->findByOne(['id' => $id]);
+
+        if ($matche) {
+            $game = new Game();
+            $matche->addGame($game);
+
+            $this->entityManager->persist($game);
+            $this->entityManager->flush();
+
+            return $this->view($game, Response::HTTP_CREATED);
+        }
+
+        return $this->view("error", Response::HTTP_BAD_REQUEST);
     }
 
 }
