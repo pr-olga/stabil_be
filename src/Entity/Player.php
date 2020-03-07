@@ -78,6 +78,11 @@ class Player
      */
     private $victory;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="players")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +216,18 @@ class Player
     public function setGame(?Game $game): self
     {
         $this->game = $game;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

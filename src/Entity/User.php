@@ -7,14 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Game
+class User
 {
-
-    use Timestamps;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -23,20 +19,24 @@ class Game
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Matche", inversedBy="games")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $matche;
+    private $name;
 
     /**
-     * One Game has two players
-     * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="game")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="user")
      */
     private $players;
-
-    private $createdAt;
-
-    private $updatedAt;
 
     public function __construct()
     {
@@ -48,38 +48,38 @@ class Game
         return $this->id;
     }
 
-    public function getMatche(): ?Matche
+    public function getName(): ?string
     {
-        return $this->matche;
+        return $this->name;
     }
 
-    public function setMatche(?Matche $matche): self
+    public function setName(string $name): self
     {
-        $this->matche = $matche;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?string
+    public function getEmail(): ?string
     {
-        return $this->createdAt;
+        return $this->email;
     }
 
-    public function setCreatedAt(string $createdAt): self
+    public function setEmail(?string $email): self
     {
-        $this->createdAt = $createdAt;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?string
+    public function getPassword(): ?string
     {
-        return $this->updatedAt;
+        return $this->password;
     }
 
-    public function setUpdatedAt(string $updatedAt): self
+    public function setPassword(?string $password): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->password = $password;
 
         return $this;
     }
@@ -96,6 +96,7 @@ class Game
     {
         if (!$this->players->contains($player)) {
             $this->players[] = $player;
+            $player->setUser($this);
         }
 
         return $this;
@@ -105,6 +106,10 @@ class Game
     {
         if ($this->players->contains($player)) {
             $this->players->removeElement($player);
+            // set the owning side to null (unless already changed)
+            if ($player->getUser() === $this) {
+                $player->setUser(null);
+            }
         }
 
         return $this;
