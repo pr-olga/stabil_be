@@ -60,32 +60,4 @@ class MatcheController extends AbstractFOSRestController
 
         return $this->view('error', Response::HTTP_BAD_REQUEST);
     }
-
-    /**
-     * @RequestParam()
-     * @param ParamFetcher $paramFetcher
-     */
-     public function patchMatcheGamesAction(ParamFetcher $paramFetcher, int $id)
-    {
-        $matche = $this->matcheRepository->findOneBy(['id' => $id]);
-
-        if ($matche) {
-            $player1 = new Player();
-            $player1->setName('player-1');
-
-
-            $player2 = new Player();
-            $player2->setName('player-2');
-
-
-            $this->entityManager->persist($player1);
-            $this->entityManager->persist($player2);
-            $this->entityManager->flush();
-
-            return $this->view(null, Response::HTTP_NO_CONTENT);
-        }
-
-        return $this->view("error", Response::HTTP_BAD_REQUEST);
-    }
-
 }

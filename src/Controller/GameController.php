@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Matche;
+use App\Entity\Player;
 use App\Entity\Game;
 use App\Repository\GameRepository;
 use App\Repository\MatcheRepository;
@@ -49,7 +50,17 @@ class GameController extends AbstractFOSRestController
             $oldMAtche = $this->entityManager->getRepository('App:Matche')->findOneBy(['id' => $match_id]);
             $game->setMatche($oldMAtche);
 
+            $player1 = new Player();
+            $player1->setName('player-1');
+            $player1->setGame($game);
+
+            $player2 = new Player();
+            $player2->setName('player-2');
+            $player2->setGame($game);
+
             $this->entityManager->persist($game);
+            $this->entityManager->persist($player1);
+            $this->entityManager->persist($player2);
             $this->entityManager->flush();
 
             return $this->view($game, Response::HTTP_CREATED);
