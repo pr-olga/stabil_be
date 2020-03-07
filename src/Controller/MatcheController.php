@@ -50,7 +50,7 @@ class MatcheController extends AbstractFOSRestController
 
         if ($is_finished) {
             $matche = new Matche();
-            $matche->setIsFinished($is_finished);
+            $matche->setIsFinished(false);
 
             $this->entityManager->persist($matche);
             $this->entityManager->flush();
