@@ -14,3 +14,7 @@ players:
   type      : rest
   resource  : App\Controller\PlayerController
   prefix    : api
+users:
+  type      : rest
+  resource  : App\Controller\UserController
+  prefix    : api
