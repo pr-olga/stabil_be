@@ -34,13 +34,13 @@ class Matche
 
      /**
      * One Match has one first User.
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="matche")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $userFirst;
 
      /**
      * One Match has one second User.
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="matche")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $userSecond;
 

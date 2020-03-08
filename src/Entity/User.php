@@ -34,12 +34,6 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Matche", mappedBy="matche")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $matche;
-
-    /**
      * One User can have many players
      * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="user")
      */
@@ -122,36 +116,4 @@ class User
 
         return $this;
     }
-
-    /**
-     * @return Collection|Matche[]
-     */
-    public function getMatche(): Collection
-    {
-        return $this->matche;
-    }
-
-    public function addMatche(Matche $matche): self
-    {
-        if (!$this->matche->contains($matche)) {
-            $this->matche[] = $matche;
-            $matche->setMatche($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMatche(Matche $matche): self
-    {
-        if ($this->matche->contains($matche)) {
-            $this->matche->removeElement($matche);
-            // set the owning side to null (unless already changed)
-            if ($matche->getMatche() === $this) {
-                $matche->setMatche(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

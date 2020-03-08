@@ -47,16 +47,24 @@ class GameController extends AbstractFOSRestController
 
         if ($match_id) {
             $game = new Game();
-            $oldMAtche = $this->entityManager->getRepository('App:Matche')->findOneBy(['id' => $match_id]);
-            $game->setMatche($oldMAtche);
+            $oldMatche = $this->entityManager->getRepository('App:Matche')->findOneBy(['id' => $match_id]);
+            $game->setMatche($oldMatche);
+
+            $first = $oldMatche->getUserFirst();
+            $second = $oldMatche->getUserSecond();
+
+            $entityUserFirst = $this->entityManager->getRepository('App:User')->findOneBy(['id' => $first]);
+            $entityUserSecond = $this->entityManager->getRepository('App:User')->findOneBy(['id' => $second]);
 
             $player1 = new Player();
             $player1->setName('player-1');
             $player1->setGame($game);
+            $player1->setUser($entityUserFirst);
 
             $player2 = new Player();
             $player2->setName('player-2');
             $player2->setGame($game);
+            $player2->setUser($entityUserSecond);
 
             $this->entityManager->persist($game);
             $this->entityManager->persist($player1);
