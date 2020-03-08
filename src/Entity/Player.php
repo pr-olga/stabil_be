@@ -80,8 +80,11 @@ class Player
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="players")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    private $toArrayProcessed = array();
 
     public function getId(): ?int
     {
@@ -232,5 +235,21 @@ class Player
         return $this;
     }
 
+    public function toArray($recursive = false)
+    {
+    $this->toArrayProcessed[$this->getId()] = 1;
+
+    $entityAsArray = get_object_vars($this);
+
+    if ($recursive) {
+        foreach ($entityAsArray as &$var) {
+            if ((is_object($var)) && (method_exists($var, 'toArray')) && !isset($this->toArrayProcessed[$var->getId()])) {
+                $var = $var->toArray($recursive);
+            }
+        }
+    }
+
+    return $entityAsArray;
+    }
 
 }
