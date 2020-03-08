@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    use Timestamps;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
