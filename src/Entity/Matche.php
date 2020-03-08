@@ -32,9 +32,23 @@ class Matche
      */
     private $isFinished;
 
+     /**
+     * One Match has one first User.
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="matche")
+     */
+    private $userFirst;
+
+     /**
+     * One Match has one second User.
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="matche")
+     */
+    private $userSecond;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
+        $this->userFirst = new ArrayCollection();
+        $this->userSecond = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,4 +98,30 @@ class Matche
 
         return $this;
     }
+
+    public function getUserFirst(): ?User
+    {
+        return $this->userFirst;
+    }
+
+    public function setUserFirst(?User $userFirst): self
+    {
+        $this->userFirst = $userFirst;
+
+        return $this;
+    }
+
+    public function getUserSecond(): ?User
+    {
+        return $this->userSecond;
+    }
+
+    public function setUserSecond(?User $userSecond): self
+    {
+        $this->userSecond = $userSecond;
+
+        return $this;
+    }
+
+
 }

@@ -41,16 +41,23 @@ class MatcheController extends AbstractFOSRestController
     }
 
     /**
-     * @RequestParam(name="is_finished")
+     * @RequestParam(name="userFirst")
+     * @RequestParam(name="userSecond")
      * @param ParamFetcher $paramFetcher
      */
     public function postMatcheAction(ParamFetcher $paramFetcher)
     {
-        $is_finished = $paramFetcher->get('is_finished');
+        $userFirst = $paramFetcher->get('userFirst');
+        $userSecond = $paramFetcher->get('userSecond');
 
-        if ($is_finished) {
+        if (($userFirst && $userSecond) && ($userFirst !== $userSecond)) {
+            $entityUserFirst = $this->entityManager->getRepository('App:User')->findOneBy(['id' => $userFirst]);
+            $entityUserSecond = $this->entityManager->getRepository('App:User')->findOneBy(['id' => $userSecond]);
+
             $matche = new Matche();
             $matche->setIsFinished(false);
+            $matche->setUserFirst($entityUserFirst);
+            $matche->setUserSecond($entityUserSecond);
 
             $this->entityManager->persist($matche);
             $this->entityManager->flush();
