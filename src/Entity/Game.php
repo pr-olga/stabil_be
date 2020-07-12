@@ -34,10 +34,6 @@ class Game
      */
     private $players;
 
-    private $createdAt;
-
-    private $updatedAt;
-
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -62,27 +58,15 @@ class Game
 
     public function getCreatedAt(): ?string
     {
-        return $this->createdAt;
+        return $this->updatedAt;
     }
 
-    public function setCreatedAt(string $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
 
     public function getUpdatedAt(): ?string
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(string $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Player[]
