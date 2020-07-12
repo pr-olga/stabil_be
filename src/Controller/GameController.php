@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use App\Entity\Matche;
 use App\Entity\Player;
-use App\Entity\Game;
 use App\Repository\GameRepository;
-use App\Repository\MatcheRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
@@ -25,16 +24,53 @@ class GameController extends AbstractFOSRestController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     *
+     * @return void
+     */
     public function getGamesAction()
     {
-        $data = $this->gameRepository->findAll();
-        return $this->view($data, Response::HTTP_OK);
+        $games = $this->gameRepository->findAll();
+
+        $filteredGames = [];
+
+        foreach ($games as $game) {
+            $filteredGames[] = [
+                "id" => $game->getId(),
+                "matcheId" => $game->getMatche()->getId(),
+                "matcheFinished" => $game->getMatche()->getIsFinished(),
+                "userFirstId" => $game->getMatche()->getUserFirst()->getId(),
+                "userFirstName" => $game->getMatche()->getUserFirst()->getName(),
+                "userSecondId" => $game->getMatche()->getUserSecond()->getId(),
+                "userSecondName" => $game->getMatche()->getUserSecond()->getName(),
+                "created" => $game->getCreatedAt(),
+                "updated" => $game->getUpdatedAt(),
+            ];
+        }
+
+        return $this->view($filteredGames, Response::HTTP_OK);
     }
 
     public function getGameAction(int $id)
     {
         $game = $this->gameRepository->findOneBy(['id' => $id]);
-        return $this->view($game, Response::HTTP_OK);
+
+        $filteredGame = [
+            "id" => $game->getId(),
+            "matcheId" => $game->getMatche()->getId(),
+            "player1" => [
+                "id" => $game->getPlayers()[0]->getId(),
+                "name" => $game->getPlayers()[0]->getName(),
+            ],
+            "player2" => [
+                "id" => $game->getPlayers()[1]->getId(),
+                "name" => $game->getPlayers()[1]->getName(),
+            ],
+            "created" => $game->getCreatedAt(),
+            "updated" => $game->getUpdatedAt(),
+        ];
+
+        return $this->view($filteredGame, Response::HTTP_OK);
     }
 
     /**
