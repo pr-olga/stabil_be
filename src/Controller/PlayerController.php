@@ -56,15 +56,15 @@ class PlayerController extends AbstractFOSRestController
         $player = $this->playerRepository->findOneBy(['id' => $id]);
 
         if ($player) {
-            $player->setWhite($params['missing']);
+            $player->setMissing($params['missing']);
             $player->setWhite($params['white']);
             $player->setBlack($params['black']);
-            $player->setWhite($params['wrong']);
-            $player->setWhite($params['double_fault']);
-            $player->setWhite($params['line_4']);
-            $player->setWhite($params['line_5']);
-            $player->setWhite($params['line_6']);
-            $player->setWhite($params['victory']);
+            $player->setWrong($params['wrong']);
+            $player->setDoubleFalut($params['double_fault']);
+            $player->setLine4($params['line_4']);
+            $player->setLine5($params['line_5']);
+            $player->setLine6($params['line_6']);
+            $player->setVictory($params['victory']);
 
             $this->entityManager->persist($player);
             $this->entityManager->flush();
