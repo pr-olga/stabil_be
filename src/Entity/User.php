@@ -118,4 +118,15 @@ class User
 
         return $this;
     }
+
+    public function getCreatedAt(): ?string
+    {
+        return $this->updatedAt;
+    }
+
+
+    public function getUpdatedAt(): ?string
+    {
+        return $this->updatedAt;
+    }
 }
