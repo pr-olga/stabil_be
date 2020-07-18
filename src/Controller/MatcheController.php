@@ -27,7 +27,32 @@ class MatcheController extends AbstractFOSRestController
     public function getMatchesAction()
     {
         $data = $this->matcheRepository->findAll();
-        return $this->view($data, Response::HTTP_OK);
+
+        $filteredMatches = [];
+
+        foreach ($data as $match) {
+
+            $gamesId = [];
+            foreach ($match->getGames() as $game) {
+                $gamesId[] = $game->getId();
+            }
+
+            $filteredMatches[] = [
+                "id" => $match->getId(),
+                "matchFinished" => $match->getIsFinished(),
+                "userFirstId" => $match->getUserFirst()->getId(),
+                "userFirstName" => $match->getUserFirst()->getName(),
+                "userSecondId" => $match->getUserSecond()->getId(),
+                "userSecondName" => $match->getUserSecond()->getName(),
+                "games" => [
+                    "ids" => $gamesId
+                ],
+                "created" => $match->getCreatedAt(),
+                "updated" => $match->getUpdatedAt(),
+            ];
+        }
+
+        return $this->view($filteredMatches, Response::HTTP_OK);
     }
 
     public function getMatcheAction(int $id)
