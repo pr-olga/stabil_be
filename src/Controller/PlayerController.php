@@ -36,7 +36,7 @@ class PlayerController extends AbstractFOSRestController
             "white" => $player->getWhite(),
             "black" => $player->getBlack(),
             "wrong" => $player->getWrong(),
-            "doubleFault" => $player->getDoubleFault(),
+            "doublefault" => $player->getDoubleFault(),
             "line4" => $player->getLine4(),
             "line5" => $player->getLine5(),
             "line6" => $player->getLine6(),
@@ -69,15 +69,12 @@ class PlayerController extends AbstractFOSRestController
         $player = $this->playerRepository->findOneBy(['id' => $id]);
 
         if ($player) {
-            $player->setMissing($params['missing']);
-            $player->setWhite($params['white']);
-            $player->setBlack($params['black']);
-            $player->setWrong($params['wrong']);
-            $player->setDoubleFault($params['double_fault']);
-            $player->setLine4($params['line_4']);
-            $player->setLine5($params['line_5']);
-            $player->setLine6($params['line_6']);
-            $player->setVictory($params['victory']);
+            foreach ($params as $k => $p) {
+                if (!is_null($p)) {
+                    $player->{'set' . ucfirst($k)}($p);
+                }
+            }
+
 
             $this->entityManager->persist($player);
             $this->entityManager->flush();
