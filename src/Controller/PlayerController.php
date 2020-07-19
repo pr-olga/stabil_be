@@ -32,6 +32,10 @@ class PlayerController extends AbstractFOSRestController
         $player = $this->playerRepository->findOneBy(['id' => $id]);
         $filteredPlayer = [
             "id" => $player->getId(),
+            "user" => [
+                "id" => $player->getUser()->getId(),
+                "name" => $player->getUser()->getName()
+            ],
             "missing" => $player->getMissing(),
             "white" => $player->getWhite(),
             "black" => $player->getBlack(),
