@@ -30,7 +30,20 @@ class PlayerController extends AbstractFOSRestController
     public function getPlayerAction(int $id)
     {
         $player = $this->playerRepository->findOneBy(['id' => $id]);
-        return $this->view($player, Response::HTTP_OK);
+        $filteredPlayer = [
+            "id" => $player->getId(),
+            "missing" => $player->getMissing(),
+            "white" => $player->getWhite(),
+            "black" => $player->getBlack(),
+            "wrong" => $player->getWrong(),
+            "doubleFault" => $player->getDoubleFault(),
+            "line4" => $player->getLine4(),
+            "line5" => $player->getLine5(),
+            "line6" => $player->getLine6(),
+            "victory" => $player->getVictory()
+        ];
+
+        return $this->view($filteredPlayer, Response::HTTP_OK);
     }
 
     /**
