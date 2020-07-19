@@ -60,7 +60,7 @@ class PlayerController extends AbstractFOSRestController
             $player->setWhite($params['white']);
             $player->setBlack($params['black']);
             $player->setWrong($params['wrong']);
-            $player->setDoubleFalut($params['double_fault']);
+            $player->setDoubleFault($params['double_fault']);
             $player->setLine4($params['line_4']);
             $player->setLine5($params['line_5']);
             $player->setLine6($params['line_6']);

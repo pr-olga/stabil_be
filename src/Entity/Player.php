@@ -202,7 +202,7 @@ class Player
         return $this->victory;
     }
 
-    public function setVictory(int $victory): self
+    public function setVictory(?int $victory): self
     {
         $this->victory = $victory;
 
