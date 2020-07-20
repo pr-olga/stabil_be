@@ -34,17 +34,22 @@ class UserController extends AbstractFOSRestController
     {
         $user = $this->userRepository->findOneBy(['id' => $id]);
 
-        $playersId = [];
+        $players = [];
         foreach ($user->getPlayers() as $player) {
-            $playersId[] = $player->getId();
-        }
+            $players[] = [
+                "id" => $player->getId(),
+                "victory" => $player->getVictory(),
+                "whites" => $player->getWhite(),
+                "blacks" => $player->getBlack()
+            ];
+          }
 
         $filteredUser = [
             "id" => $user->getId(),
             "name" => $user->getName(),
             "email" => $user->getEmail(),
             "players" => [
-                "ids" => $playersId
+                $players
             ],
             "created" => $user->getCreatedAt(),
             "updated" => $user->getUpdatedAt()
