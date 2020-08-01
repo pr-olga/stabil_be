@@ -21,8 +21,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         // $apiKey = $request->query->get('apikey');
 
         // or if you want to use an "apikey" header, then do something like this:
-        //$apiKey = $request->headers->get('apikey');
-        $apiKey = '1234567';
+        $apiKey = $request->headers->get('api-key');
 
         if (!$apiKey) {
             throw new BadCredentialsException();
@@ -55,6 +54,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         }
 
         $apiKey = $token->getCredentials();
+
         $username = $userProvider->getUsernameForApiKey($apiKey);
 
         if (!$username) {
