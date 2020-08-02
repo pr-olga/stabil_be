@@ -93,14 +93,14 @@ class Admin implements UserInterface
         return $this;
     }
 
-       /**
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->name;
+        return (string) $this->adminname;
     }
 
     /**

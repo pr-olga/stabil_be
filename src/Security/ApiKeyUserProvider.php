@@ -6,23 +6,23 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
 
 class ApiKeyUserProvider implements UserProviderInterface
 {
     private $repository;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(AdminRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function getUsernameForApiKey($apiKey)
+    public function getUsernameForApiKey($apikey)
     {
-        $user = $this->repository->findOneByApiKey($apiKey);
+        $admin = $this->repository->findOneByApikey($apikey);
 
-        if ($user) {
-            return $user->getUsername();
+        if ($admin) {
+            return $admin->getUsername();
         }
 
         return false;
