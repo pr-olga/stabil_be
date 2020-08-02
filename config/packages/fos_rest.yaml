@@ -7,7 +7,8 @@ fos_rest:
     include_format: false
   format_listener:
     rules:
-      - { path: '^/', priorities: ['json'], fallback_format: json }
+      - { path: '^/api', priorities: ['json'], fallback_format: json }
+      - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: true }
   view:
     view_response_listener: 'force'
     formats:
