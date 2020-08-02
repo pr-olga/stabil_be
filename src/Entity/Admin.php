@@ -26,7 +26,8 @@ class Admin implements UserInterface
     private $adminname;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
@@ -105,7 +106,7 @@ class Admin implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->adminname;
+        return (string) $this->email;
     }
 
     /**

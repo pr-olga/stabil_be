@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/backend", name="backend.")
@@ -53,7 +54,7 @@ class BackendController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function createAdmin(Request $request)
+    public function createAdmin(Request $request, UserPasswordEncoderInterface $passEncoder)
     {
         $admin = new Admin();
         $form = $this->createForm(AdminType::class, $admin);
@@ -61,6 +62,13 @@ class BackendController extends AbstractController
         $form->getErrors();
 
         if($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $admin = clone $data;
+
+            $admin->setPassword(
+                $passEncoder->encodePassword($admin, $data->getPassword())
+            );
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($admin);
             $em->flush();
