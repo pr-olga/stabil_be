@@ -58,8 +58,9 @@ class BackendController extends AbstractController
         $admin = new Admin();
         $form = $this->createForm(AdminType::class, $admin);
         $form->handleRequest($request);
+        $form->getErrors();
 
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($admin);
             $em->flush();
