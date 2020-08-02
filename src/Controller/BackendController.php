@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- *
  * @Route("/backend", name="backend.")
  */
 class BackendController extends AbstractController
@@ -33,17 +32,15 @@ class BackendController extends AbstractController
     /**
      * Show single admin
      *
-     * @Route("/admins/{admin?}", name="admins")
+     * @Route("/admin/{id?}", name="admin")
      *
-     * @param Request $request
+     * @param Admin $admin
      * @return Response
      */
-    public function admin(Request $request)
+    public function admin(Admin $admin)
     {
-        $name = $request->get('admin');
-
         return $this->render('backend/admin.html.twig', [
-            'admin_name' => $name
+            'admin' => $admin
         ]);
     }
 
@@ -57,18 +54,21 @@ class BackendController extends AbstractController
      */
     public function create(Request $request)
     {
-        $admin = new Admin();
+  /*       $admin = new Admin();
 
-        $admin->setAdminname('Olga');
-        $admin->setEmail('olga2@test.de');
-        $admin->setPassword('12345678');
-        $admin->setApikey('12345678');
+        $admin->setAdminname('Olga2');
+        $admin->setEmail('olga3@test.de');
+        $admin->setPassword('123456789');
+        $admin->setApikey('123456789');
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($admin);
         $em->flush();
 
-        return new Response('new Admin was created');
+        return new Response('new Admin was created'); */
+        return $this->render('backend/create.html.twig', [
+            'admin_name' => 'test'
+        ]);
     }
 
 }
