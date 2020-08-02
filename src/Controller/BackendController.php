@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Repository\AdminRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,12 @@ class BackendController extends AbstractController
      *
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(AdminRepository $adminRepository)
     {
+       $admins = $adminRepository->findAll();
+
         return $this->render('backend/index.html.twig', [
-            'controller_name' => 'BackendController',
+            'admins' => $admins
         ]);
 
     }

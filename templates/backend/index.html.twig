@@ -2,6 +2,35 @@
 {% block body %}
 
 <div class="container">
- <h1>Admins of Stabil Project</h1>
+<h1 class="mt-5">Admins of Stabil Project</h1>
+
+<table class="table table-striped table-dark mt-5 text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th scope="col">ApiKey</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for admin in admins %}
+      <tr>
+        <td>{{ admin.id}}</td>
+        <td>{{ admin.username}}</td>
+        <td>{{ admin.email}}</td>
+        <td>{{ admin.password}}</td>
+        <td>{{ admin.apikey}}</td>
+        <td>
+          <button type="button" class="btn btn-warning mr-2">Block</button>
+          <button type="button" class="btn btn-success mr-2">Modify</button>
+          <button type="button" class="btn btn-danger mr-2">Delete</button>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 </div>
 {% endblock %}
