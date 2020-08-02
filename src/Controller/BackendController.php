@@ -37,7 +37,7 @@ class BackendController extends AbstractController
      * @param Admin $admin
      * @return Response
      */
-    public function admin(Admin $admin)
+    public function showAdmin(Admin $admin)
     {
         return $this->render('backend/admin.html.twig', [
             'admin' => $admin
@@ -52,7 +52,7 @@ class BackendController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function create(Request $request)
+    public function createAdmin(Request $request)
     {
   /*       $admin = new Admin();
 
@@ -69,6 +69,26 @@ class BackendController extends AbstractController
         return $this->render('backend/create.html.twig', [
             'admin_name' => 'test'
         ]);
+    }
+
+    /**
+     * Remove Admin
+     *
+     * @Route("/remove/{id?}", name="remove")
+     *
+     * @param Admin $admin
+     * @return Response
+     */
+    public function removeAdmin(Admin $admin)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($admin);
+        $em->flush();
+
+        $this->addFlash('success', 'Admin was removed');
+
+        return $this->redirect($this->generateUrl('backend.index'));
     }
 
 }

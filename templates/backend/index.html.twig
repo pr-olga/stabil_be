@@ -4,6 +4,13 @@
 <div class="container">
 <h1 class="mt-5">Admins of Stabil Project</h1>
 
+{# read and display just one flash message type #}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <table class="table table-striped table-dark mt-5 text-center">
   <thead>
     <tr>
@@ -26,7 +33,7 @@
         <td>
           <button type="button" class="btn btn-warning mr-2">Block</button>
           <button type="button" class="btn btn-success mr-2">Modify</button>
-          <button type="button" class="btn btn-danger mr-2">Delete</button>
+          <a href="{{ path('backend.remove', {id: admin.id}) }}" type="button" class="btn btn-danger mr-2">Delete</a>
         </td>
       </tr>
     {% endfor %}
