@@ -40,6 +40,11 @@ class Admin implements UserInterface
      */
     private $apikey;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
