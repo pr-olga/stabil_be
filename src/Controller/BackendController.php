@@ -7,12 +7,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ *
+ * @Route("/backend", name="backend.")
+ */
 class BackendController extends AbstractController
 {
     /**
      * Show the list of admins
      *
-     * @Route("/backend", name="backend")
+     * @Route("/", name="index")
      */
     public function index()
     {
@@ -25,7 +29,7 @@ class BackendController extends AbstractController
     /**
      * Show single admin
      *
-     * @Route("/backend/{admin?}", name="admin")
+     * @Route("/{admin?}", name="admin")
      *
      * @param Request $request
      * @return Response
