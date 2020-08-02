@@ -1,5 +1,7 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\Admin:
+            algorithm: argon2i
     providers:
         api_key_user_provider:
             id: App\Security\ApiKeyUserProvider
@@ -13,12 +15,15 @@ security:
             simple_preauth:
                 authenticator: App\Security\ApiKeyAuthenticator
             provider: api_key_user_provider
-        main:
+        backend:
+            pattern: ^/backend
             guard:
                 authenticators:
                     - App\Security\AdminPassAuthenticator
             logout:
                 path: app_logout
+        main:
+            anonymous: true
                 # where to redirect after logout
                 # target: app_any_route
             # activate different ways to authenticate
@@ -31,4 +36,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-         - { path: ^/backend, roles: IS_AUTHENTICATED_FULLY }
+         # - { path: ^/backend, roles: IS_AUTHENTICATED_FULLY }
