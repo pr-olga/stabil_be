@@ -2,5 +2,32 @@
 {% block body %}
 <div class="container">
 <h1 class="mt-5">Create new Admin</h1>
+<div class="row mt-5">
+<div class="col-md-6">
+{{ form_start(adminForm) }}
+  <div class="form-group">
+    {{ form_label(adminForm.adminname) }}
+    {{ form_errors(adminForm.adminname) }}
+    {{ form_widget(adminForm.adminname, { 'attr': {'class': 'form-control'} }) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(adminForm.email) }}
+    {{ form_errors(adminForm.email) }}
+    {{ form_widget(adminForm.email, { 'attr': {'class': 'form-control'} }) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(adminForm.password) }}
+    {{ form_errors(adminForm.password) }}
+    {{ form_widget(adminForm.password, { 'attr': {'class': 'form-control'} }) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(adminForm.apikey) }}
+    {{ form_errors(adminForm.apikey) }}
+    {{ form_widget(adminForm.apikey, { 'attr': {'class': 'form-control'} }) }}
+  </div>
+    {{ form_row(adminForm.save) }}
+{{ form_end(adminForm) }}
+</div>
+</div>
 </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Admin;
+use App\Form\AdminType;
 use App\Repository\AdminRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,20 +55,21 @@ class BackendController extends AbstractController
      */
     public function createAdmin(Request $request)
     {
-  /*       $admin = new Admin();
+        $admin = new Admin();
+        $form = $this->createForm(AdminType::class, $admin);
+        $form->handleRequest($request);
 
-        $admin->setAdminname('Olga2');
-        $admin->setEmail('olga3@test.de');
-        $admin->setPassword('123456789');
-        $admin->setApikey('123456789');
+        if($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($admin);
+            $em->flush();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($admin);
-        $em->flush();
+            return $this->redirect($this->generateUrl('backend.index'));
+        }
 
-        return new Response('new Admin was created'); */
+
         return $this->render('backend/create.html.twig', [
-            'admin_name' => 'test'
+            'adminForm' => $form->createView()
         ]);
     }
 
