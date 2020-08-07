@@ -17,7 +17,6 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Password</th>
       <th scope="col">ApiKey</th>
       <th scope="col"></th>
     </tr>
@@ -28,7 +27,6 @@
         <td>{{ admin.id}}</td>
         <td><a href="{{ path('backend.admin', {id: admin.id}) }}">{{ admin.username}}</a></td>
         <td>{{ admin.email}}</td>
-        <td>{{ admin.password}}</td>
         <td>{{ admin.apikey}}</td>
         <td>
           <button type="button" class="btn btn-warning mr-2">Block</button>
