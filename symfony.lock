@@ -191,7 +191,7 @@
         "version": "v4.4.4"
     },
     "symfony/dotenv": {
-        "version": "v4.4.4"
+        "version": "v4.4.11"
     },
     "symfony/error-handler": {
         "version": "v4.4.4"
