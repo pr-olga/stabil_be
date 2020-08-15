@@ -70,7 +70,7 @@ class BackendController extends AbstractController
             $em->persist($admin);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('index'));
+            return $this->redirect($this->generateUrl('backend.index'));
         }
 
 
@@ -96,7 +96,7 @@ class BackendController extends AbstractController
 
         $this->addFlash('success', 'Admin was removed');
 
-        return $this->redirect($this->generateUrl('index'));
+        return $this->redirect($this->generateUrl('backend.index'));
     }
 
 }
