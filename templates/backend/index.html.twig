@@ -25,7 +25,7 @@
     {% for admin in admins %}
       <tr>
         <td>{{ admin.id}}</td>
-        <td><a href="{{ path('backend.admin', {id: admin.id}) }}">{{ admin.username}}</a></td>
+        <td><a href="{{ path('backend.admin', {id: admin.id}) }}">{{ admin.adminname}}</a></td>
         <td>{{ admin.email}}</td>
         <td>{{ admin.apikey}}</td>
         <td>
