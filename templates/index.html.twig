@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+    {% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
+      <a class="navbar-brand" href="{{ path('startpage')}}">STABIL::BE</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    </nav>
+        {% endblock %}
+{% block body %}
+<div class="container">
+<div class="jumbotron">
+  <h1 class="display-4">STABIL::BE</h1>
+  <p class="lead">This is backend and api endpoint for <strong>stabil</strong> app - statistic tracker for billiard (pool) </p>
+  <hr class="my-4">
+  <p>It is build with Symfony 4 and need authorization/authentication in order to be used.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button" href="api/doc">API Playground</a>
+    <a class="btn btn-info btn-lg" href="#" role="button" href="/login">Login to Backend</a>
+  </p>
+</div>
+</div>
+{% endblock %}
