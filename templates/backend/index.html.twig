@@ -25,13 +25,13 @@
     {% for admin in admins %}
       <tr>
         <td>{{ admin.id}}</td>
-        <td><a href="{{ path('admin', {id: admin.id}) }}">{{ admin.username}}</a></td>
+        <td><a href="{{ path('backend.admin', {id: admin.id}) }}">{{ admin.username}}</a></td>
         <td>{{ admin.email}}</td>
         <td>{{ admin.apikey}}</td>
         <td>
           <button type="button" class="btn btn-warning mr-2">Block</button>
           <button type="button" class="btn btn-success mr-2">Modify</button>
-          <a href="{{ path('remove', {id: admin.id}) }}" type="button" class="btn btn-danger mr-2">Delete</a>
+          <a href="{{ path('backend.remove', {id: admin.id}) }}" type="button" class="btn btn-danger mr-2">Delete</a>
         </td>
       </tr>
     {% endfor %}
