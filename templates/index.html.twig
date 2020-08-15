@@ -10,15 +10,16 @@
     </nav>
         {% endblock %}
 {% block body %}
-<div class="container">
+<div class="container mt-5">
 <div class="jumbotron">
   <h1 class="display-4">STABIL::BE</h1>
   <p class="lead">This is backend and api endpoint for <strong>stabil</strong> app - statistic tracker for billiard (pool) </p>
   <hr class="my-4">
-  <p>It is build with Symfony 4 and need authorization/authentication in order to be used.</p>
+  <p>It is build with Symfony 4 and you have to be authorizated/authenticated in order to used it.</p>
+  <p>To get an account, please contact the author.</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button" href="api/doc">API Playground</a>
-    <a class="btn btn-info btn-lg" href="#" role="button" href="/login">Login to Backend</a>
+    <a class="btn btn-primary btn-lg" role="button" href="api/doc">API Playground</a>
+    <a class="btn btn-info btn-lg" role="button" href="{{ path('backend.index') }}">Login to Backend</a>
   </p>
 </div>
 </div>
