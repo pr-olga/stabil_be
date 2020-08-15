@@ -6,5 +6,9 @@ Symfony 4 API
 
 ## Backend
 - deployed on Heroku
-- Access: https://shrouded-coast-76670.herokuapp.com/backend
+- Access: https://shrouded-coast-76670.herokuapp.com/
+- Authentication required
+
+## API
+- Access: https://shrouded-coast-76670.herokuapp.com/api/
 - Authentication required
