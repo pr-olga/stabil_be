@@ -42,9 +42,7 @@ class UserController extends AbstractFOSRestController
             $filteredUsers[] = [
                 "id" => $user->getId(),
                 "name" => $user->getName(),
-                "players" => [
-                    $players
-                ],
+                "players" => $players,
                 "created" => $user->getCreatedAt(),
                 "updated" => $user->getUpdatedAt(),
             ];
