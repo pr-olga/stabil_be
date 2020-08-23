@@ -29,6 +29,11 @@ class Game
     private $matche;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFinished;
+
+    /**
      * One Game has two players
      * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="game")
      */
@@ -52,6 +57,18 @@ class Game
     public function setMatche(?Matche $matche): self
     {
         $this->matche = $matche;
+
+        return $this;
+    }
+
+    public function getIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(?bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }

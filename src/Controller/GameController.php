@@ -43,6 +43,7 @@ class GameController extends AbstractFOSRestController
                 "userFirstName" => $game->getMatche()->getUserFirst()->getName(),
                 "userSecondId" => $game->getMatche()->getUserSecond()->getId(),
                 "userSecondName" => $game->getMatche()->getUserSecond()->getName(),
+                "gameFinished" => $game->getIsFinished(),
                 "created" => $game->getCreatedAt(),
                 "updated" => $game->getUpdatedAt(),
             ];
