@@ -26,8 +26,31 @@ class UserController extends AbstractFOSRestController
 
     public function getUsersAction()
     {
-        $data = $this->userRepository->findAll();
-        return $this->view($data, Response::HTTP_OK);
+        $users= $this->userRepository->findAll();
+
+        $filteredUsers = [];
+
+        foreach ($users as $user) {
+            $players = [];
+            foreach ($user->getPlayers() as $player) {
+                $players[] = [
+                    "id" => $player->getId(),
+                    "victory" => $player->getVictory()
+                ];
+            }
+
+            $filteredGames[] = [
+                "id" => $user->getId(),
+                "name" => $user->getName(),
+                "players" => [
+                    $players
+                ],
+                "created" => $user->getCreatedAt(),
+                "updated" => $user->getUpdatedAt(),
+            ];
+        }
+
+        return $this->view($filteredUsers, Response::HTTP_OK);
     }
 
     public function getUserAction(int $id)
