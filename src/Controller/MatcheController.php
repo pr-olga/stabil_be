@@ -92,4 +92,26 @@ class MatcheController extends AbstractFOSRestController
 
         return $this->view('error', Response::HTTP_BAD_REQUEST);
     }
+
+    /**
+     * @RequestParam(name="isFinished", description="test", nullable=true)
+     * @param ParamFetcher $paramFetcher
+     * @param integer $id
+     */
+    public function patchMatcheAction(ParamFetcher $paramFetcher, int $id)
+    {
+        $isFinished = $paramFetcher->get('isFinished');
+        $matche = $this->matcheRepository->findOneBy(['id' => $id]);
+
+        if ($matche) {
+            $matche->setIsFinished($isFinished);
+
+            $this->entityManager->persist($matche);
+            $this->entityManager->flush();
+
+            return $this->view(null, Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->view("error", Response::HTTP_BAD_REQUEST);
+    }
 }
