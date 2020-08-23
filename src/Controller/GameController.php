@@ -86,6 +86,7 @@ class GameController extends AbstractFOSRestController
             $game = new Game();
             $oldMatche = $this->entityManager->getRepository('App:Matche')->findOneBy(['id' => $match_id]);
             $game->setMatche($oldMatche);
+            $game->setIsFinished(false);
 
             $first = $oldMatche->getUserFirst();
             $second = $oldMatche->getUserSecond();
@@ -112,5 +113,27 @@ class GameController extends AbstractFOSRestController
         }
 
         return $this->view('error', Response::HTTP_BAD_REQUEST);
+    }
+
+     /**
+     * @RequestParam(name="isFinished", description="test", nullable=true)
+     * @param ParamFetcher $paramFetcher
+     * @param integer $id
+     */
+    public function patchGameAction(ParamFetcher $paramFetcher, int $id)
+    {
+        $isFinished = $paramFetcher->get('isFinished');
+        $game = $this->gameRepository->findOneBy(['id' => $id]);
+
+        if ($game) {
+            $game->setIsFinished($isFinished);
+
+            $this->entityManager->persist($game);
+            $this->entityManager->flush();
+
+            return $this->view(null, Response::HTTP_NO_CONTENT);
+        }
+
+        return $this->view("error", Response::HTTP_BAD_REQUEST);
     }
 }
