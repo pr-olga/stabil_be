@@ -39,7 +39,7 @@ class UserController extends AbstractFOSRestController
                 ];
             }
 
-            $filteredGames[] = [
+            $filteredUsers[] = [
                 "id" => $user->getId(),
                 "name" => $user->getName(),
                 "players" => [
