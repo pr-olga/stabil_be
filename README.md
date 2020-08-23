@@ -13,3 +13,6 @@ Symfony 4 API
 - Api endpoint: https://shrouded-coast-76670.herokuapp.com/api
 - Api Playground: https://shrouded-coast-76670.herokuapp.com/api/docs
 - Authentication required
+
+## sys req
+- at least MariaDB 10.2.*
